@@ -1,22 +1,13 @@
 import axios from "axios";
+import {useState} from "react";
 
 function TodoList() {
+  const[list, setList] = useState("");
   const getTodoList = async () => {
     const response = await axios.get("http://localhost:5050/api/todos");
-    try {
-      if (response.data.success) {
-        response.status(200).json({
-          success: true,
-          data: response,
-        });
-      }
-    } catch (err) {
-      response.status(500).json({
-        success: false,
-        message: err.message,
-      });
-    }
-  };
+    setList(response.data.data);
+  }
+  console.log("These are my Todo-lists")   
 
   return (
     <div className="todo-list">
